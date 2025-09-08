@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cap:add:android": "npx cap add android",
-    "cap:add:ios": "npx cap add ios",
-    "cap:sync": "npx cap sync",
-    "cap:open:android": "npx cap open android",
-    "cap:open:ios": "npx cap open ios",
-    "mobile:build": "npm run build && npx cap sync"
+    "mobile:init": "npx cap init",
+    "mobile:add:android": "npx cap add android",
+    "mobile:add:ios": "npx cap add ios",
+    "mobile:sync": "npx cap sync",
+    "mobile:open:android": "npx cap open android",
+    "mobile:open:ios": "npx cap open ios",
+    "mobile:build": "npm run build && npx cap sync",
+    "mobile:dev:android": "node scripts/update-ip.js && npm run build && npx cap sync android && npx cap open android",
+    "mobile:dev:ios": "node scripts/update-ip.js && npm run build && npx cap sync ios && npx cap open ios",
+    "mobile:run:android": "npm run build && npx cap sync android && npx cap run android",
+    "mobile:run:ios": "npm run build && npx cap sync ios && npx cap run ios"
   },
   "dependencies": {
     "@eslint/js": "^9.3.0",
@@ -59,6 +64,8 @@
     "@capacitor/cli": "^7.4.3",
     "@capacitor/core": "^7.4.3",
     "@capacitor/ios": "^7.4.3",
+    "@capacitor/keyboard": "^5.0.8",
+    "@capacitor/splash-screen": "^5.0.8",
     "@types/jest": "^30.0.0",
     "string-replace-loader": "^3.2.0"
   }

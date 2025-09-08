@@ -34,3 +34,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Mobile
+/android/
+/ios/
+/plugins/
+/android.zip
+/ios.zip
+
+# Capacitor
+/.capacitor/
+
+# Android
+*.jks
+*.keystore
+*.apk
+*.aab
+
+# iOS
+**/ios/Pods/
+**/ios/Podfile.lock
+**/ios/*.xcworkspace/
+**/ios/*.xcodeproj/xcuserdata/
+**/ios/*.xcodeproj/project.xcworkspace/xcuserdata/

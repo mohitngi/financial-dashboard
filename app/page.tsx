@@ -134,24 +134,30 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              {/* Mobile menu button - hidden in PDF */}
-              <button 
-                data-pdf-ignore
-                className="sm:hidden p-2 -mr-2 text-gray-500 hover:text-gray-700"
-                onClick={toggleMobileMenu}
-                aria-expanded={isMobileMenuOpen}
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? (
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
-              </button>
+              {/* Mobile menu button with theme toggle - hidden in PDF */}
+              <div className="flex items-center sm:hidden">
+                <div className="mr-2">
+                  <ThemeToggle />
+                  <span className="sr-only">Toggle theme</span>
+                </div>
+                <button 
+                  data-pdf-ignore
+                  className="p-2 -mr-2 text-gray-500 hover:text-gray-700"
+                  onClick={toggleMobileMenu}
+                  aria-expanded={isMobileMenuOpen}
+                  aria-label="Toggle menu"
+                >
+                  {isMobileMenuOpen ? (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  ) : (
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
             
             {/* Search bar and PDF Export */}
@@ -245,9 +251,8 @@ export default function Dashboard() {
               <div className="h-6 w-px bg-gray-300 mx-1"></div>
               
               <div className="flex items-center justify-between sm:justify-end space-x-2 mt-2 sm:mt-0 px-2 sm:px-0">
-                <div className="flex items-center space-x-1">
+                <div className="hidden sm:flex items-center space-x-1">
                   <ThemeToggle />
-                  <span className="text-sm text-gray-700 dark:text-gray-300 sm:hidden">Toggle Theme</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <button className="text-gray-500 hover:text-gray-700 p-1">
@@ -300,13 +305,15 @@ export default function Dashboard() {
         {/* Main Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* AUM Card */}
-          <Card className="bg-card shadow-sm border rounded-md">
+          <Card className="bg-card shadow-sm border rounded-md relative">
             <CardContent className="p-4">
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-[13px] font-medium text-muted-foreground pl-80">Current</span>
-                <Button variant="outline" size="sm" className="bg-red-50 text-red-600 border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/50 dark:hover:bg-red-900/30 text-[11px] px-2 h-5 -mr-1 mt-4">
-                  View Report
-                </Button>
+              <div className="relative w-full h-6 mb-1">
+                <span className="absolute left-0 top-0 text-[13px] font-medium text-muted-foreground">Current</span>
+                <div className="absolute right-0 top-0">
+                  <Button variant="outline" size="sm" className="bg-red-50 text-red-600 border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/50 dark:hover:bg-red-900/30 text-[11px] px-2 h-6">
+                    View Report
+                  </Button>
+                </div>
               </div>
               <div className="text-center mb-1">
                 <h2 className="text-2xl font-bold text-foreground leading-none">AUM 12.19 <span className="text-base font-normal text-muted-foreground">Cr</span></h2>
@@ -324,13 +331,15 @@ export default function Dashboard() {
           </Card>
 
           {/* SIP Booked Card */}
-          <Card className="bg-card shadow-sm border rounded-md">
+          <Card className="bg-card shadow-sm border rounded-md relative">
             <CardContent className="p-4">
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-[13px] font-medium text-muted-foreground pl-80">Current</span>
-                <Button variant="outline" size="sm" className="bg-red-50 text-red-600 border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/50 dark:hover:bg-red-900/30 text-[11px] px-2 h-5 -mr-1 mt-4">
-                  View Report
-                </Button>
+              <div className="relative w-full h-6 mb-1">
+                <span className="absolute left-0 top-0 text-[13px] font-medium text-muted-foreground">Current</span>
+                <div className="absolute right-0 top-0">
+                  <Button variant="outline" size="sm" className="bg-red-50 text-red-600 border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/50 dark:hover:bg-red-900/30 text-[11px] px-2 h-6">
+                    View Report
+                  </Button>
+                </div>
               </div>
               <div className="text-center mb-1">
                 <h2 className="text-2xl font-bold text-foreground leading-none">SIP 2.19 <span className="text-base font-normal text-muted-foreground">Lakh</span></h2>

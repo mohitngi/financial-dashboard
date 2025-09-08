@@ -48,34 +48,138 @@ pnpm start    # or npm start
 
 ### Mobile App Development
 
-#### Prerequisites
-- Android Studio (for Android development)
-- Xcode (for iOS development, macOS only)
+## 📱 Mobile App Setup
 
-#### Setup Mobile Apps
+### Prerequisites
+
+#### For Android Development
+- [Android Studio](https://developer.android.com/studio) (latest version)
+- Android SDK (installed via Android Studio)
+- Java Development Kit (JDK) 17 or later
+- Environment variables set:
+  - `ANDROID_HOME`
+  - `JAVA_HOME`
+
+#### For iOS Development (macOS only)
+- [Xcode](https://developer.apple.com/xcode/) 14+
+- CocoaPods: `sudo gem install cocoapods`
+- macOS 12.0 or later
+- iOS 14.0 or later
+
+### Development Workflow
+
+#### 1. Initial Setup
 
 ```bash
-# Build the web app first
-pnpm build    # or npm run build
+# Install dependencies
+pnpm install
+
+# Build the web app
+pnpm build
+
+# Initialize Capacitor (if not already done)
+pnpm mobile:init
 
 # Add mobile platforms
-pnpm cap:add:android    # or npm run cap:add:android
-pnpm cap:add:ios        # or npm run cap:add:ios
-
-# Sync web assets with mobile apps
-pnpm cap:sync           # or npm run cap:sync
-
-# Open in native IDEs
-pnpm cap:open:android   # or npm run cap:open:android
-pnpm cap:open:ios       # or npm run cap:open:ios
+pnpm mobile:add:android
+pnpm mobile:add:ios    # macOS only
 ```
 
-#### Mobile Build Process
+#### 2. Development with Live Reload
+
+For Android:
+```bash
+# Start Next.js dev server
+pnpm dev
+
+# In a new terminal, run:
+pnpm mobile:dev:android
+```
+
+For iOS (macOS only):
+```bash
+# Start Next.js dev server
+pnpm dev
+
+# In a new terminal, run:
+pnpm mobile:dev:ios
+```
+
+#### 3. Building for Production
 
 ```bash
-# Build and sync for mobile
-pnpm mobile:build    # or npm run mobile:build
+# Build the production web app
+pnpm build
+
+# Sync with native projects
+pnpm mobile:build
+
+# Open in native IDEs for final build
+pnpm mobile:open:android   # For Android
+pnpm mobile:open:ios       # For iOS (macOS only)
 ```
+
+### Testing on Devices
+
+#### Android
+1. Enable Developer Options on your Android device
+2. Enable USB Debugging
+3. Connect device via USB
+4. Run: `pnpm mobile:run:android`
+
+#### iOS (macOS only)
+1. Connect your iOS device
+2. Open Xcode and select your device
+3. Run: `pnpm mobile:run:ios`
+
+### Advanced Configuration
+
+#### Environment Variables
+Create a `.env.local` file with:
+```env
+NEXT_PUBLIC_API_URL=your_api_url
+# Other environment variables
+```
+
+#### Capacitor Plugins
+Additional plugins can be installed as needed:
+```bash
+pnpm add @capacitor/camera @capacitor/geolocation
+npx cap sync
+```
+
+### Troubleshooting
+
+#### Common Issues
+- **Android build fails**: Ensure all Android SDK components are installed
+- **iOS build fails**: Run `pod install` in the `ios/App` directory
+- **Live reload not working**: Check if your device is on the same network as your development machine
+- **Missing icons**: Rebuild the web assets and sync again
+
+#### Clearing Cache
+```bash
+# Clear Next.js cache
+rm -rf .next/
+
+# Clear Capacitor cache
+rm -rf android/ ios/ node_modules/
+pnpm install
+```
+
+### Deployment
+
+#### Google Play Store
+1. Generate a signed bundle:
+   ```bash
+   cd android
+   ./gradlew bundleRelease
+   ```
+2. Upload the generated AAB file to Google Play Console
+
+#### Apple App Store
+1. Open the project in Xcode
+2. Configure app signing
+3. Archive and upload via Xcode Organizer
 
 ## Dashboard Features
 
@@ -125,9 +229,6 @@ Returns complete dashboard data including AUM, SIP, statistics, and chart data.
 
 ### Themes
 The app supports both light and dark modes with automatic system preference detection.
-
-### Colors
-Primary color scheme uses red (#ef4444) for branding, with blue and green accents for data visualization.
 
 ### Charts
 All charts are responsive and support:
