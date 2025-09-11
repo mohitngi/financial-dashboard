@@ -2,7 +2,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removed 'output: export' to enable server-side rendering
   optimizeFonts: false,
   eslint: {
     // Enable ESLint during builds
